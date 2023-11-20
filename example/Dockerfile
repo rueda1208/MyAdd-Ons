@@ -1,12 +1,26 @@
-# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-# Execute during the build of the image
-ARG TEMPIO_VERSION BUILD_ARCH
-RUN \
-    curl -sSLf -o /usr/bin/tempio \
-    "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
+# Install Poetry tool
+RUN apt-get update
+RUN pip3 install poetry && poetry --version
 
-# Copy root filesystem
-COPY rootfs /
+# Create working directory
+WORKDIR /workspaces
+
+# Copy the application source files 
+COPY ./src/main.py ./src/main.py
+
+# Copy the application config
+# COPY ../../config/server ./config
+
+# Copy the dependencies source files 
+COPY ./src/poetry.lock ./poetry.lock
+COPY ./src/poetry.toml ./poetry.toml
+COPY ./src/pyproject.toml ./pyproject.toml
+
+# Install the dependencies and create a virtual environment
+RUN poetry install
+
+# Run the Web server
+ENTRYPOINT ["poetry", "run", "uvicorn", "--host", "0.0.0.0", "--port", "8000", "src.main:app"]
