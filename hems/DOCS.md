@@ -1,4 +1,4 @@
-# Home Assistant Add-on: Example add-on
+# Home Energy Management System (HEMS) Add-on
 
 ## How to use
 

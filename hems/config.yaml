@@ -1,5 +1,5 @@
 name: "HEMS"
-description: "My first real add-on!"
+description: "Home Energy Management System (HEMS)"
 version: "1.0.0"
 slug: "hems_api"
 init: false

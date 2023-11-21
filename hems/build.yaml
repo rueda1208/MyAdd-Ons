@@ -3,4 +3,3 @@ build_from:
   amd64: "amd64/python:3.11.0-slim-bullseye"
   armv7: "arm32v7/python:3.11.0-slim-bullseye"
   i386: "i386/python:3.11.0-slim-bullseye"
-
