@@ -1,25 +1,32 @@
-# import yaml
+import os
 import uvicorn
-# from typing import Dict
+import logging
+from requests import get
 from fastapi import FastAPI
 from datetime import datetime
+# import yaml
+# from typing import Dict
 
+logger = logging.getLogger(__name__)
 app = FastAPI()
 
 # # Get configuration
 # configFile = yaml.load(open("./config/config.yaml"),Loader=yaml.Loader)
-# InsightHomeConfig = configFile.get('InsightHome')
+# serviceNameConfig = configFile.get('serviceName')
 
-# # Create eGauge client
-# InsightHomeClient = InsightHome(config=InsightHomeConfig)
+URL_BASE = "http://supervisor/core"
+SUPERVISOR_TOKEN = os.getenv('SUPERVISOR_TOKEN')
+HEADERS = {"Authorization": f"Bearer {SUPERVISOR_TOKEN}", "content-type": "application/json"}
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    payload = get(URL_BASE + '/api', headers=HEADERS)
+    return payload.jscon()
 
-@app.get("/datetime")
+@app.get("/states")
 async def root():
-    return {'datetime': datetime.now()}
+    payload = get(URL_BASE + '/api/states', headers=HEADERS)
+    return payload.json()
 
 def main() -> None:
     uvicorn.run("main:app", port=8000, reload=True)

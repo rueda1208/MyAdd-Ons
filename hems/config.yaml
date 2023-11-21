@@ -11,5 +11,5 @@ arch:
 ports:
   8000/tcp: 8000
 startup: services
-host_network: true
+host_network: false
 homeassistant_api: true
