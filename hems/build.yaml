@@ -1,5 +1,6 @@
 build_from:
-  i386: "i386/python:3.11.0-slim-bullseye"
+  aarch64: "arm64v8/python:3.11.0-slim-bullseye"
   amd64: "amd64/python:3.11.0-slim-bullseye"
-  arm32v7: "arm32v7/python:3.11.0-slim-bullseye"
-  arm64v8: "arm64v8/python:3.11.0-slim-bullseye"
+  armv7: "arm32v7/python:3.11.0-slim-bullseye"
+  i386: "i386/python:3.11.0-slim-bullseye"
+
