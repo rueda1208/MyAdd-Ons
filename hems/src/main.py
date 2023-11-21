@@ -20,8 +20,8 @@ HEADERS = {"Authorization": f"Bearer {SUPERVISOR_TOKEN}", "content-type": "appli
 
 @app.get("/")
 async def root():
-    payload = get(URL_BASE + '/api', headers=HEADERS)
-    return payload.jscon()
+    payload = get(URL_BASE + '/api/', headers=HEADERS)
+    return payload.json()
 
 @app.get("/states")
 async def root():
